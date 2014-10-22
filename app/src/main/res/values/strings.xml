@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Калькулятор</string>
+    <string name="action_settings">set</string>
+    <string name="button0">0</string>
+    <string name="button1">1</string>
+    <string name="button2">2</string>
+    <string name="button3">3</string>
+    <string name="button4">4</string>
+    <string name="button5">5</string>
+    <string name="button6">6</string>
+    <string name="button7">7</string>
+    <string name="button8">8</string>
+    <string name="button9">9</string>
+    <string name="buttonDivide">/</string>
+    <string name="buttonAdd">+</string>
+    <string name="buttonSubtract">-</string>
+    <string name="buttonMultiply">*</string>
+    <string name="buttonPoint">.</string>
+    <string name="buttonEqual">=</string>
+    <string name="buttonDelete">C</string>
+    <string name="buttonLeftBracket">(</string>
+    <string name="buttonRightBracket">)</string>
+    <string name="buttonDegree">^</string>
+    <string name="buttonSqrt">√</string>
+    <string name="buttonFactorial">!</string>
+    <string name="buttonLog">log</string>
+</resources>
