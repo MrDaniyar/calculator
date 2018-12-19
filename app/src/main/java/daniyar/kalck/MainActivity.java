@@ -2,311 +2,165 @@ package daniyar.kalck;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnLongClick;
 
 
 public class MainActivity extends Activity {
 
-    private TextView mTextView;
-    private StringBuilder one = new StringBuilder("");
+    @BindView(R.id.textView) TextView mTextView;
+    @BindView(R.id.scrollView) ScrollView scrollView;
+
+    private StringBuilder one = new StringBuilder();
     private boolean colPoint = true;
     private int bracket = 0;
-    private ScrollView scrollView;
-
-
-    private Button mButton0;
-    private Button mButton1;
-    private Button mButton2;
-    private Button mButton3;
-    private Button mButton4;
-    private Button mButton5;
-    private Button mButton6;
-    private Button mButton7;
-    private Button mButton8;
-    private Button mButton9;
-    private Button mButtonDivide;
-    private Button mButtonAdd;
-    private Button mButtonSubtract;
-    private Button mButtonMultiply;
-    private Button mButtonPoint;
-    private Button mButtonDegree;
-    private Button mButtonEqual;
-    private Button mButtonDelete;
-    private Button mButtonLeftBracket;
-    private Button mButtonRightBracket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mTextView = (TextView) findViewById(R.id.textView);
-        mTextView.setMovementMethod(new ScrollingMovementMethod());
-        scrollView = (ScrollView) findViewById(R.id.scrollView);
-
-        mButton0 =(Button)findViewById(R.id.button0);
-
-        mButton0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addElement('0');
-            }
-        });
-
-        mButton1 =(Button)findViewById(R.id.button1);
-
-        mButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addElement('1');
-            }
-        });
-
-        mButton2 =(Button)findViewById(R.id.button2);
-
-        mButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addElement('2');
-            }
-        });
-
-        mButton3 =(Button)findViewById(R.id.button3);
-
-        mButton3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addElement('3');
-            }
-        });
-
-        mButton4 =(Button)findViewById(R.id.button4);
-
-        mButton4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addElement('4');
-            }
-        });
-
-        mButton5 =(Button)findViewById(R.id.button5);
-
-        mButton5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addElement('5');
-            }
-        });
-
-        mButton6 =(Button)findViewById(R.id.button6);
-
-        mButton6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addElement('6');
-            }
-        });
-
-        mButton7 =(Button)findViewById(R.id.button7);
-
-        mButton7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addElement('7');
-            }
-        });
-
-        mButton8 =(Button)findViewById(R.id.button8);
-
-        mButton8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addElement('8');
-            }
-        });
-
-        mButton9 =(Button)findViewById(R.id.button9);
-
-        mButton9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addElement('9');
-            }
-        });
-
-        mButtonAdd =(Button)findViewById(R.id.buttonAdd);
-
-        mButtonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    addOperation('+');
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        mButtonSubtract =(Button)findViewById(R.id.buttonSubtract);
-
-        mButtonSubtract.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    addOperation('-');
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        mButtonMultiply =(Button)findViewById(R.id.buttonMultiply);
-
-        mButtonMultiply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    addOperation('*');
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        mButtonDivide =(Button)findViewById(R.id.buttonDivide);
-
-        mButtonDivide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    addOperation('/');
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        mButtonDegree =(Button)findViewById(R.id.buttonDegree);
-
-        mButtonDegree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    addOperation('^');
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        mButtonDelete = (Button)findViewById(R.id.buttonDelete);
-
-        mButtonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteElement();
-            }
-        });
-
-        mButtonPoint = (Button)findViewById(R.id.buttonPoint);
-
-        mButtonPoint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (colPoint) {
-                    if(one.length()==0) {
-                        mTextView.setText(mTextView.getText() + ".");
-                        one.append(".");
-                        colPoint = false;
-                    }
-                    else if(whats(one.charAt(one.length() - 1))!=4){
-                        mTextView.setText(mTextView.getText() + ".");
-                        one.append(".");
-                        colPoint = false;
-                    }
-                }
-            }
-        });
-
-        mButtonLeftBracket = (Button)findViewById(R.id.buttonLeftBracket);
-
-        mButtonLeftBracket.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    addOperation('(');
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        mButtonRightBracket = (Button)findViewById(R.id.buttonRightBracket);
-
-        mButtonRightBracket.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    addOperation(')');
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        mButtonDelete.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                mTextView.setText("");
-                one.delete(0,one.length());
-                colPoint = true;
-                bracket = 0;
-                return false;
-            }
-        });
-
-        mButtonEqual = (Button)findViewById(R.id.buttonEqual);
-
-        mButtonEqual.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    addOperation('=');
-                    scrollView.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            scrollView.smoothScrollTo(0, scrollView.getHeight());
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
+        ButterKnife.bind(this);
     }
 
+    @OnClick(R.id.button0)
+    void setBtn0(){
+        addElement('0');
+    }
+
+    @OnClick(R.id.button1)
+    void setBtn1() {
+        addElement('1');
+    }
+
+    @OnClick(R.id.button2)
+    void setBtn2() {
+        addElement('2');
+    }
+
+    @OnClick(R.id.button3)
+    void setBtn3() {
+        addElement('3');
+    }
+
+    @OnClick(R.id.button4)
+    void setBtn4() {
+        addElement('4');
+    }
+
+    @OnClick(R.id.button5)
+    void setBtn5() {
+        addElement('5');
+    }
+
+    @OnClick(R.id.button6)
+    void setBtn6() {
+        addElement('6');
+    }
+
+    @OnClick(R.id.button7)
+    void setBtn7() {
+        addElement('7');
+    }
+
+    @OnClick(R.id.button8)
+    void setBtn8() {
+        addElement('8');
+    }
+
+    @OnClick(R.id.button9)
+    void setBtn9() {
+        addElement('9');
+    }
+
+    @OnClick(R.id.buttonAdd)
+    void setBtnAdd() {
+        addOperation('+');
+    }
+
+    @OnClick(R.id.buttonSubtract)
+    void setBtnSubtract() {
+        addOperation('-');
+    }
+
+    @OnClick(R.id.buttonMultiply)
+    void setBtnMultiply() {
+        addOperation('*');
+    }
+
+    @OnClick(R.id.buttonDivide)
+    void setBtnDivide() {
+        addOperation('/');
+    }
+
+    @OnClick(R.id.buttonDegree)
+    void setBtnDegree() {
+        addOperation('^');
+    }
+
+    @OnClick(R.id.buttonLeftBracket)
+    void setBtnLeftBracket() {
+        addOperation('(');
+    }
+
+    @OnClick(R.id.buttonRightBracket)
+    void setBtnRightBracket() {
+        addOperation(')');
+    }
+
+    @OnClick(R.id.buttonDelete)
+    void setBtnDelete() {
+        deleteElement();
+    }
+
+    @OnClick(R.id.buttonPoint)
+    void setBtnPoint() {
+        if (colPoint) {
+            if(one.length()==0) {
+                mTextView.setText(String.format("%s.", mTextView.getText()));
+                one.append(".");
+                colPoint = false;
+            }
+            else if(whats(one.charAt(one.length() - 1))!=4){
+                mTextView.setText(String.format("%s.", mTextView.getText()));
+                one.append(".");
+                colPoint = false;
+            }
+        }
+    }
+
+    @OnLongClick(R.id.buttonDelete)
+    boolean setBtnDeleteLong(){
+        mTextView.setText("");
+        one.delete(0,one.length());
+        colPoint = true;
+        bracket = 0;
+        return false;
+    }
+
+    @OnClick(R.id.buttonEqual)
+    void setBtnEqual() {
+        addOperation('=');
+    }
 
 
     private void addElement(char e){
         if(one.length()==0) {
-            mTextView.setText(mTextView.getText() + "" + e);
+            mTextView.setText(String.format("%s%s", mTextView.getText(), e));
             one.append(e);
         }
         else if(whats(one.charAt(one.length() - 1))!=4){
-            mTextView.setText(mTextView.getText() + "" + e);
+            mTextView.setText(String.format("%s%s", mTextView.getText(), e));
             one.append(e);
         }
     }
 
     private void deleteElement(){
-        StringBuilder deleteElement = new StringBuilder("");
+        StringBuilder deleteElement = new StringBuilder();
         if (one.length()!=0) {
             deleteElement.append((mTextView.getText()).toString());
             char a = deleteElement.charAt(deleteElement.length()-1);
@@ -354,24 +208,18 @@ public class MainActivity extends Activity {
         if(one.length()!=0){
             int o = whatElement(one.charAt(one.length() - 1), e);
 
-            /*if(one.length()>1 &&e=='-' && whats(one.charAt(one.length() - 1))==2){
-                mTextView.setText(mTextView.getText() + "" + e);
-                one.append(e);
-                colPoint = true;
-            } постановка минуса после * / ^
-            else */
             if (o == 1 || o == 4) {
-                mTextView.setText(mTextView.getText() + "" + e);
+                mTextView.setText(String.format("%s%s", mTextView.getText(), e));
                 one.append(e);
                 colPoint = true;
             } else if (o == 2 || o == 6) {
                 deleteElement();
-                mTextView.setText(mTextView.getText() + "" + e);
+                mTextView.setText(String.format("%s%s", mTextView.getText(), e));
                 one.append(e);
                 colPoint = true;
             }
             if(o==5 && e=='-'){
-                mTextView.setText(mTextView.getText() + "0" + e);
+                mTextView.setText(String.format("%s0%s", mTextView.getText(), e));
                 one.append(0);
                 one.append(e);
                 colPoint = true;
@@ -380,7 +228,7 @@ public class MainActivity extends Activity {
                 //замена для минуса ( ) ,число )
                 if(whats(one.charAt(one.length() - 2))==4 || whats(one.charAt(one.length() - 2))==1) {
                     deleteElement();
-                    mTextView.setText(mTextView.getText() + "" + e);
+                    mTextView.setText(String.format("%s%s", mTextView.getText(), e));
                     one.append(e);
                     colPoint = true;
                 }
@@ -388,7 +236,7 @@ public class MainActivity extends Activity {
         }
         else{
             if(whatElement(e,e)==9) {
-                mTextView.setText(mTextView.getText() + "0" + e);
+                mTextView.setText(String.format("%s0%s", mTextView.getText(), e));
                 one.append(0);
                 one.append(e);
                 colPoint = true;
@@ -396,78 +244,81 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void addOperation(char e) throws Exception {
+    private void addOperation(char e) {
         //новый код
-        switch (e){
-            case '+':{
-                appEnd(e);
-                break;
-            }
-            case '-':{
-                appEnd(e);
-                break;
-            }
-            case '*':{
-                appEnd(e);
-                break;
-            }
-            case '/':{
-                appEnd(e);
-                break;
-            }
-            case '^':{
-                appEnd(e);
-                break;
-            }
-            case '=':{
-                if(bracket!=0) {
-                    mTextView.setText(mTextView.getText() + " = " + "Не закрытая скобка\n\n");
-                    bracket = 0;
-                    one.delete(0, one.length());
-                    colPoint = true;
-                }else if(one.length()!=0) {
-                    if((one.length()>=1 && one.charAt(one.length()-1) != '-') && one.charAt(one.length()-1)!='.') {
-                        ExpressionUtils expressionUtils = new ExpressionUtils(one.toString());
-                        String answer = expressionUtils.answer();
-                        mTextView.setText(mTextView.getText() + "=" + answer + "\n\n");
+        try {
+            switch (e) {
+                case '+': {
+                    appEnd(e);
+                    break;
+                }
+                case '-': {
+                    appEnd(e);
+                    break;
+                }
+                case '*': {
+                    appEnd(e);
+                    break;
+                }
+                case '/': {
+                    appEnd(e);
+                    break;
+                }
+                case '^': {
+                    appEnd(e);
+                    break;
+                }
+                case '=': {
+                    if (bracket != 0) {
+                        mTextView.setText(String.format("%s = Не закрытая скобка\n\n", mTextView.getText()));
+                        bracket = 0;
                         one.delete(0, one.length());
                         colPoint = true;
-                        bracket = 0;
+                    } else if (one.length() != 0) {
+                        if ((one.length() >= 1 && one.charAt(one.length() - 1) != '-') && one.charAt(one.length() - 1) != '.') {
+                            ExpressionUtils expressionUtils = new ExpressionUtils(one.toString());
+                            String answer = expressionUtils.answer();
+                            mTextView.setText(String.format("%s=%s\n\n", mTextView.getText(), answer));
+                            one.delete(0, one.length());
+                            colPoint = true;
+                            bracket = 0;
+                        }
                     }
+                    break;
                 }
-                break;
-            }
-            case '(':{
-                if(one.length()==0){
-                    mTextView.setText(mTextView.getText() + "" + e);
-                    one.append(e);
-                    colPoint=true;
-                    bracket++;
-                }
-                else {
-                    int o=whatElement(one.charAt(one.length() - 1),e);
-                    if ((o == 2 || o == 3 || o == 5 || o == 6 || o == 9 || o==0) && one.charAt(one.length() - 1)!='.'){
-                        //если удалить &&, то можно использовать числа 0.(3) вместо 0.333
-                        mTextView.setText(mTextView.getText() + "" + e);
-                        one.append(e);
-                        colPoint=true;
-                        bracket++;
-                    }
-                }
-                break;
-            }
-            case ')':{
-                if(one.length()!=0) {
-                    int o=whatElement(one.charAt(one.length() - 1),e);
-                    if ((o == 1 || o == 4) && bracket > 0) {
-                        mTextView.setText(mTextView.getText() + "" + e);
+                case '(': {
+                    if (one.length() == 0) {
+                        mTextView.setText(String.format("%s%s", mTextView.getText(), e));
                         one.append(e);
                         colPoint = true;
-                        bracket--;
+                        bracket++;
+                    } else {
+                        int o = whatElement(one.charAt(one.length() - 1), e);
+                        if ((o == 2 || o == 3 || o == 5 || o == 6 || o == 9 || o == 0) && one.charAt(one.length() - 1) != '.') {
+                            //если удалить &&, то можно использовать числа 0.(3) вместо 0.333
+                            mTextView.setText(String.format("%s%s", mTextView.getText(), e));
+                            one.append(e);
+                            colPoint = true;
+                            bracket++;
+                        }
                     }
+                    break;
                 }
-                break;
+                case ')': {
+                    if (one.length() != 0) {
+                        int o = whatElement(one.charAt(one.length() - 1), e);
+                        if ((o == 1 || o == 4) && bracket > 0) {
+                            mTextView.setText(String.format("%s%s", mTextView.getText(), e));
+                            one.append(e);
+                            colPoint = true;
+                            bracket--;
+                        }
+                    }
+                    break;
+                }
             }
+        } catch (Exception er) {
+            er.printStackTrace();
         }
     }
 }
