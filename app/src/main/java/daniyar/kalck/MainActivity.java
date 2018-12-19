@@ -6,6 +6,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 
@@ -15,6 +16,8 @@ public class MainActivity extends Activity {
     private StringBuilder one = new StringBuilder("");
     private boolean colPoint = true;
     private int bracket = 0;
+    private ScrollView scrollView;
+
 
     private Button mButton0;
     private Button mButton1;
@@ -45,6 +48,8 @@ public class MainActivity extends Activity {
 
         mTextView = (TextView) findViewById(R.id.textView);
         mTextView.setMovementMethod(new ScrollingMovementMethod());
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
+
         mButton0 =(Button)findViewById(R.id.button0);
 
         mButton0.setOnClickListener(new View.OnClickListener() {
@@ -273,6 +278,12 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 try {
                     addOperation('=');
+                    scrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollView.smoothScrollTo(0, scrollView.getHeight());
+                        }
+                    });
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -280,6 +291,8 @@ public class MainActivity extends Activity {
         });
 
     }
+
+
 
     private void addElement(char e){
         if(one.length()==0) {
@@ -408,7 +421,7 @@ public class MainActivity extends Activity {
             }
             case '=':{
                 if(bracket!=0) {
-                    mTextView.setText(mTextView.getText() + " = " + "Не закрытая скобка\n");
+                    mTextView.setText(mTextView.getText() + " = " + "Не закрытая скобка\n\n");
                     bracket = 0;
                     one.delete(0, one.length());
                     colPoint = true;
@@ -416,7 +429,7 @@ public class MainActivity extends Activity {
                     if((one.length()>=1 && one.charAt(one.length()-1) != '-') && one.charAt(one.length()-1)!='.') {
                         ExpressionUtils expressionUtils = new ExpressionUtils(one.toString());
                         String answer = expressionUtils.answer();
-                        mTextView.setText(mTextView.getText() + "=" + answer + "\n");
+                        mTextView.setText(mTextView.getText() + "=" + answer + "\n\n");
                         one.delete(0, one.length());
                         colPoint = true;
                         bracket = 0;
