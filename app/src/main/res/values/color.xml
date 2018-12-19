@@ -4,4 +4,8 @@
     <color name="white">#ffffff</color>
     <color name="blue">#ff969dde</color>
     <color name="yellow">#fffff832</color>
+
+    <color name="navigationBarColor">#999999</color>
+    <color name="statusBarColor">#999999</color>
+    <color name="mainBackgroundColor">#d1d1d1</color>
 </resources>

@@ -2,14 +2,16 @@ package daniyar.kalck;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class MainActivity extends Activity {
 
-    private EditText mTextView;
+    private TextView mTextView;
     private StringBuilder one = new StringBuilder("");
     private boolean colPoint = true;
     private int bracket = 0;
@@ -41,8 +43,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextView = (EditText)findViewById(R.id.textView);
-
+        mTextView = (TextView) findViewById(R.id.textView);
+        mTextView.setMovementMethod(new ScrollingMovementMethod());
         mButton0 =(Button)findViewById(R.id.button0);
 
         mButton0.setOnClickListener(new View.OnClickListener() {
