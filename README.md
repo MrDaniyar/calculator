@@ -1,2 +1,3 @@
 # calculator
-Это учебный проект по работе с длинной арифметикой. Калькулятор может работать с очень длинными числами.
+This is an educational project for working with long arithmetic. The calculator can work with very long numbers.
+
